@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/index.css">
+    <title>Velog 형태 블로그</title>
+</head>
+<body>
+    <header>
+        <div class="header-left">
+            <h1>My Velog</h1>
+        </div>
+        <div class="header-right">
+            <input type="text" id="searchInput" placeholder="검색">
+            <button onclick="search()"><i class="fas fa-search"></i></button>
+            <button class="login">로그인</button>
+        </div>
+    </header>
+
+    <nav>
+        <div class="nav-buttons">
+            <button id="allButton">전체</button>
+            <button id="followButton">팔로우</button>
+        </div>
+    </nav>
+
+    <section class="additional-section">
+        <!-- 이 부분에 원하는 내용을 추가하세요. -->
+        <button onclick="createPost()">포스트 작성</button>
+    </section>
+
+    <section class="content">
+        <article class="post">
+            <h2>첫 번째 포스트</h2>
+            <p class="post-content">이곳에 포스트 내용이 들어갑니다.</p>
+            <p class="post-meta">날짜: 2023-11-24 | 작성자: John Doe | 좋아요: 10</p>
+        </article>
+
+        <article class="post">
+            <h2>두 번째 포스트</h2>
+            <p class="post-content">이곳에 두 번째 포스트 내용이 들어갑니다.</p>
+            <p class="post-meta">날짜: 2023-11-25 | 작성자: Jane Doe | 좋아요: 5</p>
+        </article>
+
+        <article class="post">
+            <h2>세 번째 포스트</h2>
+            <p class="post-content">이곳에 두 번째 포스트 내용이 들어갑니다.</p>
+            <p class="post-meta">날짜: 2023-11-25 | 작성자: Jane Doe | 좋아요: 5</p>
+        </article>
+
+        <article class="post">
+            <h2>네 번째 포스트</h2>
+            <p class="post-content">이곳에 두 번째 포스트 내용이 들어갑니다.</p>
+            <p class="post-meta">날짜: 2023-11-25 | 작성자: Jane Doe | 좋아요: 5</p>
+        </article>
+
+        <!-- 추가적인 포스트를 필요한 만큼 추가할 수 있습니다. -->
+    </section>
+
+    <!-- <footer>
+        <p>&copy; 2023 My Velog. All rights reserved.</p>
+    </footer> -->
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="../js/constant.js"></script>
+    <script src="../js/index-login.js"></script>
+    <script src="../js/index-posts.js"></script>
+</body>
+</html>
