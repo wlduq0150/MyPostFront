@@ -119,11 +119,7 @@
 			<p id="post-date">2023.11.11</p>
 			<button id="post-edit">포스트 관리</button>
 		</div>
-		<div id="post-body">What is Lorem Ipsum?
-Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-
-Why do we use it?
-It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+		<div id="post-body">
 		</div>
 		<div id="likes">
 			<p><span id="post-like-count">0</span>명의 추천을 받았습니다.		</p>
@@ -131,39 +127,28 @@ It is a long established fact that a reader will be distracted by the readable c
 		</div>
 	</div>
 	<div id="comments">
-		<h2>댓글</h2>
-        <div class="comment">
-			<div class="comment-bar">
-				<p class="comment-writer">Jane Doe</p>
-				<p class="comment-date">2023.11.12</p>
-				<button class="comment-like-btn">&#x1F44D;</button>
-				<button class="edit-btn">&#x270D;</button>
-				<button class="delete-btn">&#10006;</button>
-			</div>
-			<p class="comment-body"> This handy tool helps you create dummy text for all your layout needs.
-
-We are gradually adding new functionality and we welcome your suggestions and feedback.
-
-Please feel free to send us any additional dummy texts.</p>
-		</div>
-		<div class="comment">
-			<div class="comment-bar">
-				<p class="comment-writer">Baby Doe</p>
-				<p class="comment-date">2023.11.13</p>
-				<button class="comment-like-btn">&#x1F44D;</button>
-				<button class="edit-btn">&#x270D;</button>
-				<button class="delete-btn">&#10006;</button>
-			</div>
-			<p class="comment-body">응애</p>
-		</div>
 		<form id="comment-form">
-			<textarea id="comment" name="comment" rows="4" cols="50" placeholder="댓글을 입력해주세요."></textarea>	
+			<textarea id="commentContent" name="comment" rows="4" cols="50" placeholder="댓글을 입력해주세요."></textarea>	
 			<input type="submit" value="Submit">
 		</form>
 	</div>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-	<script src="/api.post.detail.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+	<script src="../js/constant.js"></script>
+	<script src="../js/index-post.js"></script>
+	<script src="../js/post-detail.js"></script>
     <script>
+		const queryString = window.location.search;
+		const urlParams = new URLSearchParams(queryString);
+		const postId = urlParams.get("postId");
+		$(document).ready(async function () {
+			await getPost(postId)
+			await getComments(postId)
+			$("#comment-form").on("submit", async function(e){
+				e.preventDefault()
+				await axios.put(server+`/api/comments/${postId}`,{content: $("#commentContent").val()})
+			})
+		})
     </script>
 </body>
 </html>
