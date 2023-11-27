@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>블로그 포스트</title>
@@ -11,7 +12,7 @@
             padding: 20px;
             font-family: 'Arial', sans-serif;
             line-height: 1.6;
-			max-width: 1000px;
+            max-width: 1000px;
         }
 
         #post {
@@ -41,6 +42,11 @@
         #post-body {
             line-height: 1.8;
             color: #444;
+        }
+
+        .adjusted-image {
+            max-width: 100%;
+            height: auto;
         }
 
         #likes {
@@ -111,46 +117,48 @@
         }
     </style>
 </head>
+
 <body>
     <div id="post">
-		<h1 id="post-title">포스트 제목</h1>
-		<div id="post-info">
-			<p id="post-writer">John Doe</p>
-			<p id="post-date">2023.11.11</p>
-			<button id="post-edit">포스트 관리</button>
-		</div>
-		<div id="post-body">
-		</div>
-		<div id="likes">
-			<p><span id="post-like-count">0</span>명의 추천을 받았습니다.		</p>
-			<button id="post-like-btn">추천하기</button>
-		</div>
-	</div>
-	<div id="comments">
-		<form id="comment-form">
-			<textarea id="commentContent" name="comment" rows="4" cols="50" placeholder="댓글을 입력해주세요."></textarea>	
-			<input type="submit" value="Submit">
-		</form>
-	</div>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-	<script src="../js/constant.js"></script>
+        <h1 id="post-title">포스트 제목</h1>
+        <div id="post-info">
+            <p id="post-writer">John Doe</p>
+            <p id="post-date">2023.11.11</p>
+            <button id="post-edit">포스트 관리</button>
+        </div>
+        <div id="post-body">
+        </div>
+        <div id="likes">
+            <p><span id="post-like-count">0</span>명의 추천을 받았습니다. </p>
+            <button id="post-like-btn">추천하기</button>
+        </div>
+    </div>
+    <div id="comments">
+        <form id="comment-form">
+            <textarea id="commentContent" name="comment" rows="4" cols="50" placeholder="댓글을 입력해주세요."></textarea>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="../js/constant.js"></script>
     <script src="../js/index-login.js"></script>
-	<script src="../js/post-detail.js"></script>
+    <script src="../js/post-detail.js"></script>
     <script>
         checkAndAddTokenToHeaders();
-		const queryString = window.location.search;
-		const urlParams = new URLSearchParams(queryString);
-		const postId = urlParams.get("postId");
-		$(document).ready(async function () {
-			await getPost(postId)
-			await getComments(postId)
-			$("#comment-form").on("submit", async function(e){
-				e.preventDefault()
-				await axios.post(server+`/api/comments?postId=${postId}`,{content: $("#commentContent").val()}, {headers})
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const postId = urlParams.get("postId");
+        $(document).ready(async function () {
+            await getPost(postId)
+            await getComments(postId)
+            $("#comment-form").on("submit", async function (e) {
+                e.preventDefault()
+                await axios.post(server + `/api/comments?postId=${postId}`, { content: $("#commentContent").val() }, { headers })
                 location.reload();
-			})
-		})
+            })
+        })
     </script>
 </body>
+
 </html>

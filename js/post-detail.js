@@ -5,11 +5,12 @@ async function getPost(postId) {
         post = res.data.data;
         $("#post-title").text(post.title);
         $("#post-date").text(post.createdAt.slice(0, 10));
-        $("#post-body").html(post.content);
+        const imageAdjustedContent = post.content.replace(/<img/g, '<img class="adjusted-image"');
+        $("#post-body").html(imageAdjustedContent);
         $("#post-like-count").text(post.likes);
         $("#post-like-btn").click(async function () {
             try {
-                const res = await axios.put(server + `/api/posts/${postId}/like`,{}, {headers});
+                const res = await axios.put(server + `/api/posts/${postId}/like`, {}, { headers });
                 $("#post-like-count").text(res.data.data.likes);
             } catch (e) {
                 console.log(e);
@@ -31,14 +32,14 @@ async function getPost(postId) {
 async function getComments(postId) {
     let comments = [];
     try {
-        const res = await axios.get(server + `/api/comments?postId=${postId}`, {headers});
+        const res = await axios.get(server + `/api/comments?postId=${postId}`, { headers });
         comments = res.data.postComments;
     } catch (e) {
         return alert(e.response?.message || "댓글을 불러오는 과정에서 오류가 발생했습니다.");
     }
     for (let comment of comments)
         try {
-            const writer = await axios.get(server + `/api/user/${comment.userId}`, {headers});
+            const writer = await axios.get(server + `/api/user/${comment.userId}`, { headers });
             const commentBar = $(`<div class="comment-bar"></div>`);
             commentBar.append(`<p class="comment-writer">${writer.data.data.name}</p>
 			<p class="comment-date">${comment.createdAt.slice(0, 10)}</p>
@@ -48,12 +49,12 @@ async function getComments(postId) {
             );
             commentLikeBtn.click(async function () {
                 try {
-                    const res = await axios.put(server+`/api/comments/${comment.id}/like`, {}, {headers});
-					commentBar.children('p').eq(3).children('span').eq(1).text(res.likes);
+                    const res = await axios.put(server + `/api/comments/${comment.id}/like`, {}, { headers });
+                    commentBar.children('p').eq(3).children('span').eq(1).text(res.likes);
                 } catch (e) {
                     console.log(e);
                 }
-                
+
             });
             commentBar.append(commentLikeBtn);
             const editBtn = $(`<button class="edit-btn comment-btn">&#x270D;</button>`);
@@ -67,14 +68,14 @@ async function getComments(postId) {
                 commentBody.attr("contenteditable", "true");
                 commentHTML.append(newSubmit);
                 newSubmit.click(async function () {
-					try{
-						await axios.put(server+`/api/comments/${comment.id}`, {
-							content: "commentBody.text()",
-						}, {headers});
-					}catch(e){
-						alert(e.response?.message || "오류가 발생했습니다.")
-						commentBody.text(originalComment)
-					}
+                    try {
+                        await axios.put(server + `/api/comments/${comment.id}`, {
+                            content: "commentBody.text()",
+                        }, { headers });
+                    } catch (e) {
+                        alert(e.response?.message || "오류가 발생했습니다.")
+                        commentBody.text(originalComment)
+                    }
                     newSubmit.remove();
                     commentBody.attr("contenteditable", "false");
                     $(".comment-btn").each(function () {
@@ -86,14 +87,14 @@ async function getComments(postId) {
             const deleteBtn = $(`<button class="delete-btn comment-btn">&#10006;</button>`);
             deleteBtn.click(async function () {
                 const deleteVal = confirm("댓글을 삭제하겠습니까?");
-                if (deleteVal){ 
-					try{
-						await axios.delete(server+`/api/comments/${comment.id}`, {headers});
-					}catch(e){
-						alert(e.response?.message || "오류가 발생했습니다.")
-					}
-					commentHTML.remove()
-				}
+                if (deleteVal) {
+                    try {
+                        await axios.delete(server + `/api/comments/${comment.id}`, { headers });
+                    } catch (e) {
+                        alert(e.response?.message || "오류가 발생했습니다.")
+                    }
+                    commentHTML.remove()
+                }
             });
             commentBar.append(deleteBtn);
             const commentHTML = $(`<div class="comment"></div>`);
