@@ -1,5 +1,9 @@
 let thumbnailURL = "";
 
+window.onload = () => {
+    checkAndAddTokenToHeaders();
+}
+
 $(".imageSubmit").click(async function () {
     let url;
     const mean = confirm(
@@ -12,6 +16,7 @@ $(".imageSubmit").click(async function () {
         const res = await axios.post(server + "/api/posts/image", formData, {
             headers: {
                 "Content-Type": "multipart/form-data",
+                ...headers
             },
         });
         url = res.data.data.image;
@@ -34,6 +39,7 @@ $(".thumbnailSubmit").click(async function () {
     const res = await axios.post(server + "/api/posts/image", formData, {
         headers: {
             "Content-Type": "multipart/form-data",
+            ...headers
         },
     });
     thumbnailURL = res.data.data.image;
@@ -49,6 +55,8 @@ $("#createPostForm").on("submit", async function (e) {
     await axios.post(server + "/api/posts", formData, {
         headers: {
             "Content-Type": "multipart/form-data",
+            ...headers
         },
     });
+    location.href = "./index.html";
 });

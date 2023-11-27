@@ -53,4 +53,8 @@ function loginUser() {
         location.reload();
     });
 
+    auth.querySelector(".username").addEventListener("click", (e) => {
+        location.href = `./user-detail.html`;
+    });
+
 }

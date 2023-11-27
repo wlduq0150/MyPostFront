@@ -4,13 +4,13 @@ async function getPosts(type) {
         let posts;
 
         if (type === "all") {
-            const response = await axios.get(server+"/api/posts", {
+            const response = await axios.get(server + "/api/posts", {
                 headers
             });
 
             posts = response.data.data;
         } else if (type === "follow") {
-            const response = await axios.get(server+"/api/posts/follow/only", {
+            const response = await axios.get(server + "/api/posts/follow/only", {
                 headers
             });
 
@@ -23,9 +23,9 @@ async function getPosts(type) {
             createPostElement(post);
         }
     } catch (e) {
-        // if (e.response.status === 401) {
-        //     loginAlert();
-        // }
+        if (e.response.status === 401) {
+            loginAlert();
+        }
         console.log(e);
     }
 }
@@ -43,11 +43,20 @@ function createPostElement(postInfo) {
     const section = document.querySelector(".content");
     const post = document.createElement("article");
     post.classList.add("post");
-    post.innerHTML = `
-        <h2>${postInfo.title}</h2>
-        <p class="post-content">${postInfo.content.slice(0, 100)}</p>
-        <p class="post-meta">날짜: ${postInfo.createdAt.slice(0, 10)} | <span class="writer">작성자: ${postInfo.user.name}</span> | 좋아요: ${postInfo.likes}</p>
-    `;
+    if (postInfo.thumbnail !== null) {
+        post.innerHTML = `
+            <img class="post-thumbnail" src="${postInfo.thumbnail}" style="width: 200px; height: 200px;">
+            <h2>${postInfo.title}</h2>
+            <p class="post-meta">날짜: ${postInfo.createdAt.slice(0, 10)} | <span class="writer">작성자: ${postInfo.user.name}</span> | 좋아요: ${postInfo.likes}</p>
+            <p class="post-content">${postInfo.content.slice(0, 100)}</p>
+        `;
+    } else {
+        post.innerHTML = `
+            <h2>${postInfo.title}</h2>
+            <p class="post-meta">날짜: ${postInfo.createdAt.slice(0, 10)} | <span class="writer">작성자: ${postInfo.user.name}</span> | 좋아요: ${postInfo.likes}</p>
+            <p class="post-content">${postInfo.content.slice(0, 100)}</p>
+        `;
+    }
 
     console.log(postInfo);
 
@@ -74,6 +83,10 @@ window.onload = async () => {
     followButton.addEventListener("click", (e) => {
         clearPostElement();
         getPosts("follow");
+    });
+
+    document.querySelector(".postCreate").addEventListener("click", (e) => {
+        location.href = "./posting.html";
     });
 
     getPosts("all");
