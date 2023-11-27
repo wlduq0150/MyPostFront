@@ -42,7 +42,7 @@ $("#createPostForm").on("submit", async function(e){
 	e.preventDefault()
 	const formData = new FormData();
 	const imagefile = document.querySelector('#thumbnail');
-	formData.append("image", imagefile.files[0]);
+	formData.append("thumbnail", imagefile.files[0]);
 	formData.append("content",$("#postContent").val());
 	formData.append("title",$("#postTitle").val());
 	await axios.post(server+'/api/posts', formData, {
