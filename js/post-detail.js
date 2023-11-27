@@ -62,7 +62,7 @@ async function getComments(postId) {
                 newSubmit.click(async function () {
 					try{
 						await axios.put(`/api/comments/${comment.id}`, {
-							content: "commentBody.text()",
+							content: commentBody.text(),
 						});
 					}catch(e){
 						alert(e.response?.message || "오류가 발생했습니다.")

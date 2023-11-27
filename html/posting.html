@@ -13,12 +13,14 @@
 
     <section class="create-post-section">
         <h2>포스트 작성</h2>
+		<input type="file" id="file" />​
+		<button class="imageSubmit">이미지 업로드</button>
+		<input type="file" id="thumbnail" />​
+		<button class="thumbnailSubmit">썸네일 업로드</button>
+        <button class="videoSubmit">비디오 업로드</button>
         <form id="createPostForm">
             <label for="postTitle">제목:</label>
             <input type="text" id="postTitle" name="postTitle" required>
-
-            <button class="imageSubmit"></button>
-            <button class="videoSubmit"></button>
             <label for="postContent">내용:</label>
             <textarea id="postContent" name="postContent" rows="4" required></textarea>
 
@@ -31,7 +33,9 @@
     </section>
 
     <!-- 기존 JavaScript 파일 로드 -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+	<script src="../js/constant.js"></script>
     <script src="../js/posting.js"></script>
 </body>
 
