@@ -23,7 +23,7 @@ async function getPosts(type) {
             createPostElement(post);
         }
     } catch (e) {
-        if (e.response.status === 401) {
+        if (e.response && e.response.status === 401) {
             loginAlert();
         }
         console.log(e);
@@ -43,17 +43,18 @@ function createPostElement(postInfo) {
     const section = document.querySelector(".content");
     const post = document.createElement("article");
     post.classList.add("post");
+    console.log(postInfo);
     if (postInfo.thumbnail !== null) {
         post.innerHTML = `
             <img class="post-thumbnail" src="${postInfo.thumbnail}" style="width: 200px; height: 200px;">
             <h2>${postInfo.title}</h2>
-            <p class="post-meta">날짜: ${postInfo.createdAt.slice(0, 10)} | <span class="writer">작성자: ${postInfo.user.name}</span> | 좋아요: ${postInfo.likes}</p>
+            <p class="post-meta">날짜: ${postInfo.createdAt.slice(0, 10)} | <span class="writer">작성자: ${postInfo.name}</span> | 좋아요: ${postInfo.likes}</p>
             <p class="post-content">${postInfo.content.slice(0, 100)}</p>
         `;
     } else {
         post.innerHTML = `
             <h2>${postInfo.title}</h2>
-            <p class="post-meta">날짜: ${postInfo.createdAt.slice(0, 10)} | <span class="writer">작성자: ${postInfo.user.name}</span> | 좋아요: ${postInfo.likes}</p>
+            <p class="post-meta">날짜: ${postInfo.createdAt.slice(0, 10)} | <span class="writer">작성자: ${postInfo.name}</span> | 좋아요: ${postInfo.likes}</p>
             <p class="post-content">${postInfo.content.slice(0, 100)}</p>
         `;
     }
