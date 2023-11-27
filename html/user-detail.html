@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="../css/user-detail.css">
+</head>
+<body>
+    <div>
+        <h1>User Profile</h1>
+
+        <!-- 사용자 정보 -->
+        <div>
+            <label for="name">Name:</label>
+            <input type="text" id="name" value="" disabled>
+        </div>
+
+        <div>
+            <label for="email">Email:</label>
+            <input type="email" id="email" value="" disabled>
+        </div>
+
+        <div>
+            <label for="password">Password:</label>
+            <input type="password" id="password" value="*********" disabled>
+            <button onclick="editPassword()">Edit Password</button>
+        </div>
+
+        <div>
+            <label for="birthdate">Birthdate:</label>
+            <input type="text" id="birthdate" value="" disabled>
+        </div>
+
+        <div>
+            <label for="following">Following:</label>
+            <ul id="followingList">
+            </ul>
+        </div>
+
+        <!-- 수정 버튼 -->
+        <button onclick="editProfile()">Edit Profile</button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+	<script src="../js/constant.js"></script>
+    <script src="../js/index-login.js"></script>
+    <script src="../js/user-detail.js"></script>
+
+    <script>
+        checkAndAddTokenToHeaders()
+        .then(() => {
+            uploadProfile();
+        })
+        .catch(() => {
+            alert("프로필을 불러올 수 없습니다!");
+        });
+
+        const name = document.getElementById('name');
+        const email = document.getElementById('email');
+        const password = document.getElementById('password');
+        const birth =  document.getElementById('birthdate');
+        
+
+        function editProfile() {
+            // 사용자 정보 수정 가능하도록 활성화
+            name.disabled = false;
+            email.disabled = false;
+            password.disabled = false;
+            birth.disabled = false;
+
+            // 수정 버튼 감추기
+            document.querySelector('button').style.display = 'none';
+        }
+
+        function editPassword() {
+            // 비밀번호 수정 모달 또는 페이지를 열거나 다른 방법으로 비밀번호를 수정할 수 있도록 구현
+            alert('Implement password editing logic here');
+        }
+    </script>
+</body>
+</html>

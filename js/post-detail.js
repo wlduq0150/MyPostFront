@@ -46,7 +46,7 @@ async function getComments(postId) {
                 `<button class="comment-like-btn comment-btn">&#x1F44D;</button>`
             );
             commentLikeBtn.click(async function () {
-                await axios.put(`/api/comments/${comment.id}/like`);
+                await axios.put(server+`/api/comments/${comment.id}/like`);
             });
             commentBar.append(commentLikeBtn);
             const editBtn = $(`<button class="edit-btn comment-btn">&#x270D;</button>`);
@@ -61,7 +61,7 @@ async function getComments(postId) {
                 commentHTML.append(newSubmit);
                 newSubmit.click(async function () {
 					try{
-						await axios.put(`/api/comments/${comment.id}`, {
+						await axios.put(server+`/api/comments/${comment.id}`, {
 							content: "commentBody.text()",
 						});
 					}catch(e){
@@ -81,7 +81,7 @@ async function getComments(postId) {
                 const deleteVal = confirm("댓글을 삭제하겠습니까?");
                 if (deleteVal){ 
 					try{
-						await axios.delete(`/api/comments/${comment.id}`);
+						await axios.delete(server+`/api/comments/${comment.id}`);
 					}catch(e){
 						alert(e.response?.message || "오류가 발생했습니다.")
 					}

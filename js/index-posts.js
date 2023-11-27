@@ -23,9 +23,9 @@ async function getPosts(type) {
             createPostElement(post);
         }
     } catch (e) {
-        // if (e.response.status === 401) {
-        //     loginAlert();
-        // }
+        if (e.response.status === 401) {
+            loginAlert();
+        }
         console.log(e);
     }
 }
