@@ -8,16 +8,16 @@ async function getPost(postId) {
         $("#post-body").html(post.content);
         $("#post-like-count").text(post.likes);
         $("#post-like-btn").click(async function () {
-			try{
-				const res = await axios.put(server + `/api/posts/${postId}/like`);
-				$("#post-like-count").text(res.data.likes);
-			}catch(e){
-				alert(e.response?.message || "오류가 발생했습니다.")
-			}
+            try {
+                const res = await axios.put(server + `/api/posts/${postId}/like`);
+                $("#post-like-count").text(res.data.likes);
+            } catch (e) {
+                alert(e.response?.message || "오류가 발생했습니다.");
+            }
         });
         writerId = post.userId;
     } catch (e) {
-        return alert(e.response?.message || "오류가 발생했습니다.")
+        return alert(e.response?.message || "오류가 발생했습니다.");
     }
     try {
         const writer = await axios.get(server + `/api/user/${writerId}`);
@@ -33,7 +33,7 @@ async function getComments(postId) {
         const res = await axios.get(server + `/api/comments?postId=${postId}`);
         comments = res.data.postComments;
     } catch (e) {
-        return alert(e.response?.message || "댓글을 불러오는 과정에서 오류가 발생했습니다.")
+        return alert(e.response?.message || "댓글을 불러오는 과정에서 오류가 발생했습니다.");
     }
     for (let comment of comments)
         try {
@@ -56,7 +56,7 @@ async function getComments(postId) {
                 });
                 const newSubmit = $(`<button>수정</button>`);
                 const commentBody = commentHTML.find(".comment-body");
-				const originalComment = commentBody.text()
+                const originalComment = commentBody.text();
                 commentBody.attr("contenteditable", "true");
                 commentHTML.append(newSubmit);
                 newSubmit.click(async function () {

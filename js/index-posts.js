@@ -76,5 +76,9 @@ window.onload = async () => {
         getPosts("follow");
     });
 
+    document.querySelector(".postCreate").addEventListener("click", (e) => {
+        location.href="./posting.html";
+    });
+
     getPosts("all");
 };
