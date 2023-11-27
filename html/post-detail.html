@@ -135,9 +135,10 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 	<script src="../js/constant.js"></script>
-	<script src="../js/index-post.js"></script>
+    <script src="../js/index-login.js"></script>
 	<script src="../js/post-detail.js"></script>
     <script>
+        checkAndAddTokenToHeaders();
 		const queryString = window.location.search;
 		const urlParams = new URLSearchParams(queryString);
 		const postId = urlParams.get("postId");
@@ -146,7 +147,8 @@
 			await getComments(postId)
 			$("#comment-form").on("submit", async function(e){
 				e.preventDefault()
-				await axios.put(server+`/api/comments/${postId}`,{content: $("#commentContent").val()})
+				await axios.post(server+`/api/comments?postId=${postId}`,{content: $("#commentContent").val()}, {headers})
+                location.reload();
 			})
 		})
     </script>

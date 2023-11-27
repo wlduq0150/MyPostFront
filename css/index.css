@@ -59,6 +59,11 @@ header {
     text-decoration: none;
 }
 
+.auth {
+    display: flex;
+    flex-direction: row;
+}
+
 .nav-buttons {
     display: flex;
     justify-content: center;
@@ -109,6 +114,7 @@ header {
 .post {
     border: 1px solid #ccc;
     padding: 20px;
+    cursor: pointer;
 }
 
 .post h2 {

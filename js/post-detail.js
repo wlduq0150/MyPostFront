@@ -26,7 +26,7 @@ async function getPost(postId) {
 async function getComments(postId) {
     let comments = [];
     try {
-        const res = await axios.get(server + `/api/comments/?postId=${postId}`);
+        const res = await axios.get(server + `/api/comments?postId=${postId}`);
         comments = res.data.postComments;
     } catch (e) {
         console.log(e);
