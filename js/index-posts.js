@@ -9,7 +9,6 @@ async function getPosts(type) {
             });
 
             posts = response.data.data;
-            console.log(posts);
         } else if (type === "follow") {
             const response = await axios.get(server+"/api/posts/follow/only", {
                 headers
@@ -21,9 +20,7 @@ async function getPosts(type) {
         }
 
         for (let post of posts) {
-            if (post.length) {
-                createPostElement(post);
-            }
+            createPostElement(post);
         }
     } catch (e) {
         // if (e.response.status === 401) {
@@ -52,11 +49,19 @@ function createPostElement(postInfo) {
         <p class="post-meta">날짜: ${postInfo.createdAt.slice(0, 10)} | <span class="writer">작성자: ${postInfo.user.name}</span> | 좋아요: ${postInfo.likes}</p>
     `;
 
+    console.log(postInfo);
+
+    post.addEventListener("click", (e) => {
+        location.href = `./post-detail.html?postId=${postInfo.id}`
+    });
+
     section.appendChild(post);
 }
 
-window.onload = () => {
-    checkAndAddTokenToHeaders();
+window.onload = async () => {
+    if (await checkAndAddTokenToHeaders()) {
+        loginUser();
+    }
 
     const allButton = document.querySelector("#allButton");
     const followButton = document.querySelector("#followButton");

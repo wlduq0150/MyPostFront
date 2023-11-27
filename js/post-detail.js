@@ -30,7 +30,7 @@ async function getPost(postId) {
 async function getComments(postId) {
     let comments = [];
     try {
-        const res = await axios.get(server + `/api/comments/?postId=${postId}`);
+        const res = await axios.get(server + `/api/comments?postId=${postId}`);
         comments = res.data.postComments;
     } catch (e) {
         return alert(e.response?.message || "댓글을 불러오는 과정에서 오류가 발생했습니다.")

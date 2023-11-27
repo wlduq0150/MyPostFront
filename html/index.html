@@ -15,7 +15,9 @@
         <div class="header-right">
             <input type="text" id="searchInput" placeholder="검색">
             <button onclick="search()"><i class="fas fa-search"></i></button>
-            <a href="login.html" class="login">로그인</a>
+            <div class="auth">
+                <a href="login.html" class="login">로그인</a>
+            </div>
         </div>
     </header>
 
@@ -28,7 +30,7 @@
 
     <section class="additional-section">
         <!-- 이 부분에 원하는 내용을 추가하세요. -->
-        <button onclick="createPost()">포스트 작성</button>
+        <button class="postCreate">포스트 작성</button>
     </section>
 
     <section class="content">
