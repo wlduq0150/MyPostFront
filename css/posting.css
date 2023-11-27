@@ -1,0 +1,42 @@
+.create-post-section {
+    margin: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.create-post-section h2 {
+    color: #333;
+}
+
+.create-post-section form {
+    display: grid;
+    gap: 10px;
+}
+
+.create-post-section label {
+    font-weight: bold;
+}
+
+.create-post-section input,
+.create-post-section textarea {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+}
+
+.create-post-section button {
+    padding: 10px;
+    cursor: pointer;
+    border: none;
+    background-color: #333;
+    color: #fff;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.create-post-section button:hover {
+    background-color: #555;
+}

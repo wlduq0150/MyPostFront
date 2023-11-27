@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/posting.css">
+    <title>Velog 형태 블로그</title>
+</head>
+
+<body>
+    <!-- 기존 HTML 코드 유지 -->
+
+    <section class="create-post-section">
+        <h2>포스트 작성</h2>
+        <form id="createPostForm">
+            <label for="postTitle">제목:</label>
+            <input type="text" id="postTitle" name="postTitle" required>
+
+            <button class="imageSubmit"></button>
+            <button class="videoSubmit"></button>
+            <label for="postContent">내용:</label>
+            <textarea id="postContent" name="postContent" rows="4" required></textarea>
+
+            <button type="submit">작성 완료</button>
+        </form>
+    </section>
+
+    <section class="content">
+        <!-- 기존 HTML 코드 유지 -->
+    </section>
+
+    <!-- 기존 JavaScript 파일 로드 -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="../js/constant.js"></script>
+    <script src="../js/index-login.js"></script>
+    <script src="../js/index-posts.js"></script>
+</body>
+
+</html>
