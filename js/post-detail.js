@@ -10,7 +10,7 @@ async function getPost(postId) {
         $("#post-like-btn").click(async function () {
             try {
                 const res = await axios.put(server + `/api/posts/${postId}/like`);
-                $("#post-like-count").text(res.data.likes);
+                $("#post-like-count").text(res.data.data.likes);
             } catch (e) {
                 alert(e.response?.message || "오류가 발생했습니다.");
             }
