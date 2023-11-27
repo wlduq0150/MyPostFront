@@ -41,6 +41,24 @@ header {
     background-color: #555;
 }
 
+.header-right a {
+    padding: 8px 16px;
+    cursor: pointer;
+    border: none;
+    text-decoration: none;
+    background-color: #333;
+    color: #fff;
+    font-size: 18px;
+}
+
+.header-right a:hover {
+    background-color: #555;
+}
+
+.header-right a::after {
+    text-decoration: none;
+}
+
 .nav-buttons {
     display: flex;
     justify-content: center;

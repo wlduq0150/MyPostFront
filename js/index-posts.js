@@ -4,23 +4,32 @@ async function getPosts(type) {
         let posts;
 
         if (type === "all") {
-            const response = await axios.get(server+"/api/posts");
+            const response = await axios.get(server+"/api/posts", {
+                headers
+            });
 
             posts = response.data.data;
             console.log(posts);
         } else if (type === "follow") {
-            const response = await axios.get(server+"/api/posts/follow/only");
+            const response = await axios.get(server+"/api/posts/follow/only", {
+                headers
+            });
 
-            posts = response.data.data;
+            posts = response.data.followPost;
+            console.log(response);
+            console.log(posts);
         }
 
         for (let post of posts) {
-            createPostElement(post);
+            if (post.length) {
+                createPostElement(post);
+            }
         }
     } catch (e) {
-        if (e.response.status === 401) {
-            loginAlert();
-        }
+        // if (e.response.status === 401) {
+        //     loginAlert();
+        // }
+        console.log(e);
     }
 }
 
@@ -47,6 +56,8 @@ function createPostElement(postInfo) {
 }
 
 window.onload = () => {
+    checkAndAddTokenToHeaders();
+
     const allButton = document.querySelector("#allButton");
     const followButton = document.querySelector("#followButton");
 
